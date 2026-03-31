@@ -14,4 +14,4 @@ jobs:
         run: ls
 
       - name: Success message
-        run: echo "Code checked successfully ✅"
+        run: echo "Code checked successfully"
