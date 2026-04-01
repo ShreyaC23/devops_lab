@@ -1,0 +1,29 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Show files
+        run: ls
+
+      - name: Install dependencies (simulated)
+        run: echo "Installing dependencies..."
+
+      - name: Run tests (simulated)
+        run: |
+          echo "Running tests..."
+          if grep -q "error" app.txt; then
+            echo "Test failed ❌"
+            exit 1
+          fi
+
+      - name: Build success
+        run: echo "Build passed ✅"

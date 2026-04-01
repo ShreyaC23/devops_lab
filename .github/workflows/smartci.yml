@@ -1,0 +1,38 @@
+name: Smart CI Pipeline
+
+on:
+  push:
+    branches:
+      - feature-login
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Show files
+        run: ls
+
+      - name: Check if app.txt exists
+        run: |
+          if [ ! -f app.txt ]; then
+            echo "app.txt missing"
+            exit 1
+          fi
+
+      - name: Check for bad content
+        run: |
+          if grep -q "error" app.txt; then
+            echo "Bad content found"
+            exit 1
+          fi
+
+      - name: Success
+        run: echo "All checks passed"
